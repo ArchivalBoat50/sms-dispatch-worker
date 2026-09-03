@@ -1,0 +1,29 @@
+name = "dispatch-worker"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# Escalation ladder runs every minute.
+[triggers]
+crons = ["* * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dispatch"
+database_id = "PASTE_AFTER_CREATE"   # wrangler d1 create dispatch
+
+[vars]
+CLIENT_ID = "demo"
+BUSINESS_NAME = "Sydney Emergency Plumbing"
+# Set after first deploy so SMS accept links point at the live host:
+PUBLIC_BASE_URL = "https://dispatch-worker.YOUR-SUBDOMAIN.workers.dev"
+
+# Numbers — E.164. Put your own mobile in all three while testing.
+TECH_1_NUMBER = "+61400000001"
+TECH_2_NUMBER = "+61400000002"
+OWNER_NUMBER  = "+61400000003"
+TWILIO_FROM   = "+61400000000"
+
+# Secrets — never in this file. Set with `wrangler secret put NAME`:
+#   DISPATCH_SECRET     (must match the x-dispatch-secret header in Vapi)
+#   TWILIO_ACCOUNT_SID
+#   TWILIO_AUTH_TOKEN

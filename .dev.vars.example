@@ -1,0 +1,11 @@
+# Local development secrets for `wrangler dev`. Copy to .dev.vars and fill in.
+# .dev.vars is gitignored; in production these are set with `wrangler secret put NAME`.
+
+# Shared secret checked on POST /dispatch, and reused as the ?key= on the job
+# board. Must match the x-dispatch-secret header the voice agent sends.
+# Generate with: openssl rand -hex 32
+DISPATCH_SECRET=replace_me
+
+# Twilio credentials. The SID starts with AC.
+TWILIO_ACCOUNT_SID=replace_me
+TWILIO_AUTH_TOKEN=replace_me
